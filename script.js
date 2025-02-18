@@ -136,8 +136,28 @@ function toggleDarkMode() {
 
 // Text Formatting Functions
 function boldText() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('bold', false, null);
+    const textarea = document.getElementById('noteContent');
+
+    if (textarea) {
+        // Store the current selection
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+
+        // Apply focus to the textarea
+        textarea.focus();
+
+        // Execute the bold command
+        try {
+            document.execCommand('bold', false, null);
+        } catch (err) {
+            console.error('Unable to execute bold command:', err);
+            alert('Failed to apply bold formatting.');
+        }
+
+        // Restore the previous selection
+        textarea.selectionStart = start;
+        textarea.selectionEnd = end;
+    }
 }
 
 function italicText() {
