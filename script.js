@@ -188,14 +188,51 @@ function changeFontFamily() {
     if (!quill) return;
 
     const fontFamily = document.getElementById('fontFamily').value;
-    quill.format('font', fontFamily);
+    
+    // Map the selected font to a CSS class
+    let fontClass = '';
+    switch (fontFamily) {
+        case 'Arial':
+            fontClass = 'ql-font-arial';
+            break;
+        case 'Times New Roman':
+            fontClass = 'ql-font-times-new-roman';
+            break;
+        case 'Courier New':
+            fontClass = 'ql-font-courier-new';
+            break;
+        case 'Verdana':
+            fontClass = 'ql-font-verdana';
+            break;
+    }
+    quill.format('font', fontClass);
 }
 
 function changeFontSize() {
     if (!quill) return;
 
     const fontSize = document.getElementById('fontSize').value;
-    quill.format('size', fontSize);
+
+    // Map the selected font size to a CSS class
+    let sizeClass = '';
+    switch (fontSize) {
+        case '12':
+            sizeClass = 'ql-size-12';
+            break;
+        case '14':
+            sizeClass = 'ql-size-14';
+            break;
+        case '16':
+            sizeClass = 'ql-size-16';
+            break;
+        case '18':
+            sizeClass = 'ql-size-18';
+            break;
+        case '20':
+            sizeClass = 'ql-size-20';
+            break;
+    }
+    quill.format('size', sizeClass);
 }
 
 // Additional functions for the menu options
