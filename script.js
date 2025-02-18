@@ -1,5 +1,6 @@
 let notes = [];
 let isDarkMode = false;
+let editingIndex = -1; // Track the index of the note being edited
 
 // Function to display notes
 function displayNotes() {
@@ -10,10 +11,15 @@ function displayNotes() {
         const li = document.createElement('li');
         li.textContent = note;
 
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = () => editNote(index);
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = () => deleteNote(index);
 
+        li.appendChild(editButton);
         li.appendChild(deleteButton);
         notesList.appendChild(li);
     });
@@ -24,13 +30,27 @@ document.getElementById('addNoteButton').onclick = function() {
     const noteContent = document.getElementById('noteContent').value;
 
     if (noteContent) {
-        notes.push(noteContent);
+        if (editingIndex !== -1) {
+            // Update existing note
+            notes[editingIndex] = noteContent;
+            editingIndex = -1; // Reset editing index
+        } else {
+            // Add new note
+            notes.push(noteContent);
+        }
         document.getElementById('noteContent').value = '';
         displayNotes();
     } else {
         alert('Please enter a note.');
     }
 };
+
+// Function to edit a note
+function editNote(index) {
+    const noteContent = notes[index];
+    document.getElementById('noteContent').value = noteContent;
+    editingIndex = index;
+}
 
 // Function to delete a note
 function deleteNote(index) {
@@ -150,6 +170,7 @@ function changeFontSize() {
 // Additional functions for the menu options
 function newNote() {
     document.getElementById('noteContent').value = '';
+    editingIndex = -1; // Reset editing index when creating a new note
 }
 
 function saveNote() {
