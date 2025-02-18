@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
+    <!-- Quill stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -73,7 +75,8 @@
 
         <div class="main-content">
             <div class="editor-area">
-                <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+                <!-- Element to hold the Quill editor -->
+                <div id="noteContent"></div>
                 <button id="addNoteButton">Add Note</button>
             </div>
             <div class="notes-area">
@@ -85,6 +88,8 @@
 
     <input type="file" id="importFile" accept=".json" style="display: none;" />
     
+    <!-- Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
