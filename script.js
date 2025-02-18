@@ -107,6 +107,9 @@ function toggleDarkMode() {
 
     const dropdownContentLinks = document.querySelectorAll('.dropdown-content a');
     dropdownContentLinks.forEach(link => link.classList.toggle('dark-mode', isDarkMode));
+    
+    const toolbar = document.querySelector('.toolbar');
+    toolbar.classList.toggle('dark-mode', isDarkMode);
 }
 
 // Text Formatting Functions
@@ -122,6 +125,28 @@ function underlineText() {
     document.execCommand('underline', false, null);
 }
 
+function alignLeft() {
+    document.execCommand('justifyLeft', false, null);
+}
+
+function alignCenter() {
+    document.execCommand('justifyCenter', false, null);
+}
+
+function alignRight() {
+    document.execCommand('justifyRight', false, null);
+}
+
+function changeFontFamily() {
+    const fontFamily = document.getElementById('fontFamily').value;
+    document.execCommand('fontName', false, fontFamily);
+}
+
+function changeFontSize() {
+    const fontSize = document.getElementById('fontSize').value;
+    document.execCommand('fontSize', false, fontSize);
+}
+
 // Additional functions for the menu options
 function newNote() {
     document.getElementById('noteContent').value = '';
@@ -133,6 +158,10 @@ function saveNote() {
 
 function openNote() {
     alert('Open functionality to be implemented.');
+}
+
+function printNote() {
+    window.print();
 }
 
 function undo() {
@@ -157,4 +186,20 @@ function paste() {
 
 function selectAll() {
     document.execCommand('selectAll', false, null);
+}
+
+function findAndReplace() {
+    alert('Find and Replace functionality to be implemented.');
+}
+
+function insertImage() {
+    alert('Insert Image functionality to be implemented.');
+}
+
+function insertLink() {
+    alert('Insert Link functionality to be implemented.');
+}
+
+function insertTable() {
+    alert('Insert Table functionality to be implemented.');
 }
