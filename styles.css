@@ -238,21 +238,20 @@ li {
     font-family: Arial, sans-serif; /* Default font family */
 }
 
-/* Apply specific font families */
-.ql-font-arial .ql-editor {
-    font-family: Arial, sans-serif;
+.ql-font-times-new-roman {
+  font-family: "Times New Roman", serif;
 }
-
-.ql-font-times-new-roman .ql-editor {
-    font-family: 'Times New Roman', serif;
+.ql-font-arial {
+  font-family: Arial, sans-serif;
 }
-
-.ql-font-courier-new .ql-editor {
-    font-family: 'Courier New', monospace;
+.ql-font-courier-new {
+  font-family: "Courier New", monospace;
 }
-
-.ql-font-verdana .ql-editor {
-    font-family: Verdana, sans-serif;
+.ql-font-georgia {
+  font-family: Georgia, serif;
+}
+.ql-font-verdana {
+  font-family: Verdana, sans-serif;
 }
 
 /* Apply specific font sizes */
