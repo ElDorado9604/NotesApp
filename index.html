@@ -71,12 +71,16 @@
             </select>
         </div>
 
-        <textarea id="noteContent" placeholder="Write your note here..."></textarea>
-
-        <button id="addNoteButton">Add Note</button>
-
-        <h2>Your Notes</h2>
-        <ul id="notesList"></ul>
+        <div class="main-content">
+            <div class="editor-area">
+                <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+                <button id="addNoteButton">Add Note</button>
+            </div>
+            <div class="notes-area">
+                <h2>Your Notes</h2>
+                <ul id="notesList"></ul>
+            </div>
+        </div>
     </div>
 
     <input type="file" id="importFile" accept=".json" style="display: none;" />
