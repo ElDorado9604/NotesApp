@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
-        <h1>Notes App</h1>
+        <div class="menu-bar">
+            <div class="dropdown">
+                <button class="dropbtn">File <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="newNote()">New</a>
+                    <a href="#" onclick="saveNote()">Save</a>
+                    <a href="#" onclick="openNote()">Open</a>
+                    <a href="#" onclick="exportNotes()">Export</a>
+                    <a href="#" onclick="importNotes()">Import</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Edit <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="undo()">Undo</a>
+                    <a href="#" onclick="redo()">Redo</a>
+                    <a href="#" onclick="cut()">Cut</a>
+                    <a href="#" onclick="copy()">Copy</a>
+                    <a href="#" onclick="paste()">Paste</a>
+                    <a href="#" onclick="selectAll()">Select All</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">View <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+                </div>
+            </div>
+            
+            <div class="toolbar">
+                <button onclick="boldText()"><i class="fa fa-bold"></i></button>
+                <button onclick="italicText()"><i class="fa fa-italic"></i></button>
+                <button onclick="underlineText()"><i class="fa fa-underline"></i></button>
+            </div>
+        </div>
+
         <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+
         <button id="addNoteButton">Add Note</button>
 
         <h2>Your Notes</h2>
         <ul id="notesList"></ul>
-
-        <button id="exportButton">Export Notes</button>
-        <input type="file" id="importFile" accept=".json" />
-        <button id="importButton">Import Notes</button>
     </div>
 
+    <input type="file" id="importFile" accept=".json" style="display: none;" />
+    
     <script src="script.js"></script>
 </body>
 </html>
