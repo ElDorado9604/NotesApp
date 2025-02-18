@@ -1,6 +1,17 @@
 let notes = [];
 let isDarkMode = false;
 let editingIndex = -1; // Track the index of the note being edited
+let quill; // Define quill outside the DOMContentLoaded event
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Quill editor
+    quill = new Quill('#noteContent', {
+        theme: 'snow',
+        modules: {
+            toolbar: false // We'll handle the toolbar manually
+        }
+    });
+});
 
 // Function to display notes
 function displayNotes() {
@@ -9,15 +20,13 @@ function displayNotes() {
 
     notes.forEach((note, index) => {
         const li = document.createElement('li');
-        li.textContent = note;
+        li.innerHTML = note; // Render HTML content
 
-        // Add Edit button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.onclick = () => editNote(index);
         li.appendChild(editButton);
 
-        // Add Delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = () => deleteNote(index);
@@ -29,7 +38,9 @@ function displayNotes() {
 
 // Function to add a note
 document.getElementById('addNoteButton').onclick = function() {
-    const noteContent = document.getElementById('noteContent').value;
+    if (!quill) return;
+
+    const noteContent = quill.root.innerHTML;
 
     if (noteContent) {
         if (editingIndex !== -1) {
@@ -40,7 +51,7 @@ document.getElementById('addNoteButton').onclick = function() {
             // Add new note
             notes.push(noteContent);
         }
-        document.getElementById('noteContent').value = '';
+        quill.root.innerHTML = '';
         displayNotes();
     } else {
         alert('Please enter a note.');
@@ -49,8 +60,10 @@ document.getElementById('addNoteButton').onclick = function() {
 
 // Function to edit a note
 function editNote(index) {
+    if (!quill) return;
+
     const noteContent = notes[index];
-    document.getElementById('noteContent').value = noteContent;
+    quill.root.innerHTML = noteContent;
     editingIndex = index;
 }
 
@@ -136,70 +149,60 @@ function toggleDarkMode() {
 
 // Text Formatting Functions
 function boldText() {
-    const textarea = document.getElementById('noteContent');
+    if (!quill) return;
 
-    if (textarea) {
-        // Store the current selection
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-
-        // Apply focus to the textarea
-        textarea.focus();
-
-        // Execute the bold command
-        try {
-            document.execCommand('bold', false, null);
-        } catch (err) {
-            console.error('Unable to execute bold command:', err);
-            alert('Failed to apply bold formatting.');
-        }
-
-        // Restore the previous selection
-        textarea.selectionStart = start;
-        textarea.selectionEnd = end;
-    }
+    quill.format('bold', true);
 }
 
 function italicText() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('italic', false, null);
+    if (!quill) return;
+
+    quill.format('italic', true);
 }
 
 function underlineText() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('underline', false, null);
+    if (!quill) return;
+
+    quill.format('underline', true);
 }
 
 function alignLeft() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('justifyLeft', false, null);
+    if (!quill) return;
+
+    quill.format('align', 'left');
 }
 
 function alignCenter() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('justifyCenter', false, null);
+    if (!quill) return;
+
+    quill.format('align', 'center');
 }
 
 function alignRight() {
-    document.getElementById('noteContent').focus();
-    document.execCommand('justifyRight', false, null);
+    if (!quill) return;
+
+    quill.format('align', 'right');
 }
 
 function changeFontFamily() {
+    if (!quill) return;
+
     const fontFamily = document.getElementById('fontFamily').value;
-    document.getElementById('noteContent').focus();
-    document.execCommand('fontName', false, fontFamily);
+    quill.format('font', fontFamily);
 }
 
 function changeFontSize() {
+    if (!quill) return;
+
     const fontSize = document.getElementById('fontSize').value;
-    document.getElementById('noteContent').focus();
-    document.execCommand('fontSize', false, fontSize);
+    quill.format('size', fontSize);
 }
 
 // Additional functions for the menu options
 function newNote() {
-    document.getElementById('noteContent').value = '';
+    if (!quill) return;
+
+    quill.root.innerHTML = '';
     editingIndex = -1; // Reset editing index when creating a new note
 }
 
@@ -216,26 +219,38 @@ function printNote() {
 }
 
 function undo() {
+    if (!quill) return;
+
     document.execCommand('undo', false, null);
 }
 
 function redo() {
+    if (!quill) return;
+
     document.execCommand('redo', false, null);
 }
 
 function cut() {
+    if (!quill) return;
+
     document.execCommand('cut', false, null);
 }
 
 function copy() {
+    if (!quill) return;
+
     document.execCommand('copy', false, null);
 }
 
 function paste() {
+    if (!quill) return;
+
     document.execCommand('paste', false, null);
 }
 
 function selectAll() {
+    if (!quill) return;
+
     document.execCommand('selectAll', false, null);
 }
 
