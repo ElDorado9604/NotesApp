@@ -11,16 +11,18 @@ function displayNotes() {
         const li = document.createElement('li');
         li.textContent = note;
 
+        // Add Edit button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.onclick = () => editNote(index);
+        li.appendChild(editButton);
 
+        // Add Delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = () => deleteNote(index);
-
-        li.appendChild(editButton);
         li.appendChild(deleteButton);
+
         notesList.appendChild(li);
     });
 }
