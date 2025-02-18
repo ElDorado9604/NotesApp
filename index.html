@@ -13,11 +13,12 @@
             <div class="dropdown">
                 <button class="dropbtn">File <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown-content">
-                    <a href="#" onclick="newNote()">New</a>
+                    <a href="#" onclick="newNote()">New Document</a>
                     <a href="#" onclick="saveNote()">Save</a>
-                    <a href="#" onclick="openNote()">Open</a>
+                    <a href="#" onclick="openNote()">Open...</a>
                     <a href="#" onclick="exportNotes()">Export</a>
                     <a href="#" onclick="importNotes()">Import</a>
+                    <a href="#" onclick="printNote()">Print</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -29,6 +30,15 @@
                     <a href="#" onclick="copy()">Copy</a>
                     <a href="#" onclick="paste()">Paste</a>
                     <a href="#" onclick="selectAll()">Select All</a>
+                    <a href="#" onclick="findAndReplace()">Find and Replace</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Insert <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="insertImage()">Image</a>
+                    <a href="#" onclick="insertLink()">Link</a>
+                    <a href="#" onclick="insertTable()">Table</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -37,12 +47,28 @@
                     <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
                 </div>
             </div>
-            
-            <div class="toolbar">
-                <button onclick="boldText()"><i class="fa fa-bold"></i></button>
-                <button onclick="italicText()"><i class="fa fa-italic"></i></button>
-                <button onclick="underlineText()"><i class="fa fa-underline"></i></button>
-            </div>
+        </div>
+
+        <div class="toolbar">
+            <button onclick="boldText()"><i class="fa fa-bold"></i></button>
+            <button onclick="italicText()"><i class="fa fa-italic"></i></button>
+            <button onclick="underlineText()"><i class="fa fa-underline"></i></button>
+            <button onclick="alignLeft()"><i class="fa fa-align-left"></i></button>
+            <button onclick="alignCenter()"><i class="fa fa-align-center"></i></button>
+            <button onclick="alignRight()"><i class="fa fa-align-right"></i></button>
+            <select id="fontFamily" onchange="changeFontFamily()">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Verdana">Verdana</option>
+            </select>
+            <select id="fontSize" onchange="changeFontSize()">
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+            </select>
         </div>
 
         <textarea id="noteContent" placeholder="Write your note here..."></textarea>
