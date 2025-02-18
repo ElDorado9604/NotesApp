@@ -3,6 +3,10 @@ let isDarkMode = false;
 let editingIndex = -1; // Track the index of the note being edited
 let quill; // Define quill outside the DOMContentLoaded event
 
+var Font = Quill.import('formats/font');
+Font.whitelist = ['times-new-roman', 'arial', 'courier-new', 'georgia', 'verdana'];
+Quill.register(Font, true);
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     quill = new Quill('#noteContent', {
@@ -184,29 +188,6 @@ function alignRight() {
     quill.format('align', 'right');
 }
 
-function changeFontFamily() {
-    if (!quill) return;
-
-    const fontFamily = document.getElementById('fontFamily').value;
-    
-    // Map the selected font to a CSS class
-    let fontClass = '';
-    switch (fontFamily) {
-        case 'Arial':
-            fontClass = 'ql-font-arial';
-            break;
-        case 'Times New Roman':
-            fontClass = 'ql-font-times-new-roman';
-            break;
-        case 'Courier New':
-            fontClass = 'ql-font-courier-new';
-            break;
-        case 'Verdana':
-            fontClass = 'ql-font-verdana';
-            break;
-    }
-    quill.format('font', fontClass);
-}
 
 function changeFontSize() {
     if (!quill) return;
