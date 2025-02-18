@@ -47,7 +47,10 @@ h1 {
 .notes-area {
     flex: 1;
     padding-left: 20px;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #ccc;    
+    /* Added styles for scrolling */
+    max-height: 400px; /* Adjust the max-height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */ 
 }
 
 textarea {
