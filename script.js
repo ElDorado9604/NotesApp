@@ -136,36 +136,44 @@ function toggleDarkMode() {
 
 // Text Formatting Functions
 function boldText() {
+    document.getElementById('noteContent').focus();
     document.execCommand('bold', false, null);
 }
 
 function italicText() {
+    document.getElementById('noteContent').focus();
     document.execCommand('italic', false, null);
 }
 
 function underlineText() {
+    document.getElementById('noteContent').focus();
     document.execCommand('underline', false, null);
 }
 
 function alignLeft() {
+    document.getElementById('noteContent').focus();
     document.execCommand('justifyLeft', false, null);
 }
 
 function alignCenter() {
+    document.getElementById('noteContent').focus();
     document.execCommand('justifyCenter', false, null);
 }
 
 function alignRight() {
+    document.getElementById('noteContent').focus();
     document.execCommand('justifyRight', false, null);
 }
 
 function changeFontFamily() {
     const fontFamily = document.getElementById('fontFamily').value;
+    document.getElementById('noteContent').focus();
     document.execCommand('fontName', false, fontFamily);
 }
 
 function changeFontSize() {
     const fontSize = document.getElementById('fontSize').value;
+    document.getElementById('noteContent').focus();
     document.execCommand('fontSize', false, fontSize);
 }
 
