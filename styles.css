@@ -230,42 +230,50 @@ li {
     padding: 10px;
 }
 
-/* Quill font sizes */
-.ql-size-12 {
+/* Existing styles */
+
+/* Target Quill editor directly */
+.ql-editor {
+    font-size: 16px; /* Default font size */
+    font-family: Arial, sans-serif; /* Default font family */
+}
+
+/* Apply specific font families */
+.ql-font-arial .ql-editor {
+    font-family: Arial, sans-serif;
+}
+
+.ql-font-times-new-roman .ql-editor {
+    font-family: 'Times New Roman', serif;
+}
+
+.ql-font-courier-new .ql-editor {
+    font-family: 'Courier New', monospace;
+}
+
+.ql-font-verdana .ql-editor {
+    font-family: Verdana, sans-serif;
+}
+
+/* Apply specific font sizes */
+.ql-size-12 .ql-editor {
     font-size: 12px;
 }
 
-.ql-size-14 {
+.ql-size-14 .ql-editor {
     font-size: 14px;
 }
 
-.ql-size-16 {
+.ql-size-16 .ql-editor {
     font-size: 16px;
 }
 
-.ql-size-18 {
+.ql-size-18 .ql-editor {
     font-size: 18px;
 }
 
-.ql-size-20 {
+.ql-size-20 .ql-editor {
     font-size: 20px;
-}
-
-/* Quill font families */
-.ql-font-arial {
-    font-family: 'Arial';
-}
-
-.ql-font-times-new-roman {
-    font-family: Times New Roman;
-}
-
-.ql-font-courier-new {
-    font-family: 'Courier New';
-}
-
-.ql-font-verdana {
-    font-family: 'Verdana';
 }
 
 .dark-mode #noteContent {
