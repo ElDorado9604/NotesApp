@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     quill = new Quill('#noteContent', {
         theme: 'snow',
+        placeholder: '  Start typing your note here...',
         modules: {
             toolbar: false, // We'll handle the toolbar manually
             size: {
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
     // Set default font style and size
     quill.format('font', 'arial');
     quill.format('size', '16px');
