@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     quill = new Quill('#noteContent', {
         theme: 'snow',
-        placeholder: '  Start typing your note here...',
+        placeholder: '  Start typing your note here and enjoy...',
         modules: {
             toolbar: false, // We'll handle the toolbar manually
             size: {
