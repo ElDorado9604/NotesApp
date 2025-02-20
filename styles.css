@@ -145,8 +145,13 @@ li {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.dark-mode .dropdown-content {
+    background-color: #444;
+}
+
 .dark-mode .dropdown-content a {
     color: #fff;
+    background-color: #444;
 }
 
 .dropdown-content a:hover {
@@ -155,7 +160,7 @@ li {
 }
 
 .dark-mode .dropdown-content a:hover {
-    background-color: #666;
+    background-color: #555;
     color: #fff;
 }
 
