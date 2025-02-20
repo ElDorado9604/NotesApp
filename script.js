@@ -3,16 +3,40 @@ let isDarkMode = false;
 let editingIndex = -1; // Track the index of the note being edited
 let quill; // Define quill outside the DOMContentLoaded event
 
-var Font = Quill.import('formats/font');
+var Size = Quill.import('attributors/style/size');
+var Font = Quill.import('attributors/class/font');
+Size.whitelist = ['12px', '14px', '16px', '18px', '20px'];
 Font.whitelist = ['times-new-roman', 'arial', 'courier-new', 'georgia', 'verdana'];
 Quill.register(Font, true);
+Quill.register(Size, true);
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     quill = new Quill('#noteContent', {
         theme: 'snow',
         modules: {
-            toolbar: false // We'll handle the toolbar manually
+            toolbar: false, // We'll handle the toolbar manually
+            size: {
+                options: ['12px', '14px', '16px', '18px', '20px']
+            }
+        }
+    });
+    // Set default font style and size
+    quill.format('font', 'arial');
+    quill.format('size', '16px');
+    document.getElementById('fontFamily').value = 'arial';
+    document.getElementById('fontSize').value = '16';
+        // Update font size dropdown when selection changes
+        quill.on('selection-change', function(range) {
+        if (range) {
+            const format = quill.getFormat(range);
+            if (format.size) {
+                const sizeValue = format.size.replace('px', '');
+                document.getElementById('fontSize').value = sizeValue;
+            }
+            if (format.font) {
+                document.getElementById('fontFamily').value = format.font;
+            }
         }
     });
 });
@@ -154,25 +178,30 @@ function toggleDarkMode() {
 // Text Formatting Functions
 function boldText() {
     if (!quill) return;
-
-    quill.format('bold', true);
+    
+    const format = quill.getFormat();
+    quill.format('bold', !format.bold);
 }
 
 function italicText() {
     if (!quill) return;
-
-    quill.format('italic', true);
+    
+    const format = quill.getFormat();
+    quill.format('italic', !format.italic);
 }
 
 function underlineText() {
     if (!quill) return;
-
-    quill.format('underline', true);
+    
+    const format = quill.getFormat();
+    quill.format('underline', !format.underline);
 }
 
 function alignLeft() {
     if (!quill) return;
-
+    // Remove any existing alignment first
+    quill.format('align', false);
+    // Then set left alignment
     quill.format('align', 'left');
 }
 
@@ -194,26 +223,14 @@ function changeFontSize() {
 
     const fontSize = document.getElementById('fontSize').value;
 
-    // Map the selected font size to a CSS class
-    let sizeClass = '';
-    switch (fontSize) {
-        case '12':
-            sizeClass = 'ql-size-12';
-            break;
-        case '14':
-            sizeClass = 'ql-size-14';
-            break;
-        case '16':
-            sizeClass = 'ql-size-16';
-            break;
-        case '18':
-            sizeClass = 'ql-size-18';
-            break;
-        case '20':
-            sizeClass = 'ql-size-20';
-            break;
-    }
-    quill.format('size', sizeClass);
+    quill.format('size', fontSize + 'px');
+}
+
+function changeFontFamily() {
+    if (!quill) return;
+
+    const fontFamily = document.getElementById('fontFamily').value;
+    quill.format('font', fontFamily);
 }
 
 // Additional functions for the menu options
