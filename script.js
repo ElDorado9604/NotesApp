@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     quill = new Quill('#noteContent', {
         theme: 'snow',
+        placeholder: '  Start typing your note here and enjoy the app...',
         modules: {
             toolbar: false, // We'll handle the toolbar manually
             size: {
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
     // Set default font style and size
     quill.format('font', 'arial');
     quill.format('size', '16px');
@@ -39,9 +41,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
+
+        // Update font size and font family dropdown when text changes
+        let previousLineNumber = 1;
+        quill.on('text-change', (delta, oldDelta, source) => {
+            const scroll = quill.scroll;
+            const currentLineNumber = scroll.children.length;
+            console.log("Number of lines in scroll", currentLineNumber);
+
+            if (currentLineNumber > previousLineNumber) {
+                                    // Log current font style
+                                    const currentFormat = quill.getFormat();
+                                    console.log("Current font style:", currentFormat.font);
+                                    console.log("Current font size:", currentFormat.size);
+
+                //Add wait time to allow the font style to be applied
+                setTimeout(() => {
+                    quill.format('font', currentFormat.font);
+                    quill.format('size', currentFormat.size);
+                    document.getElementById('fontFamily').value = currentFormat.font;
+                    document.getElementById('fontSize').value = currentFormat.size.replace('px', '');
+                }, 10);
+            }
+            
+            previousLineNumber = currentLineNumber;
+        });
+
+
+        });
+
+function toggleFullScreen() {
+    const editorArea = document.querySelector('.editor-area');
+    const notesArea = document.querySelector('.notes-area');
+
+    if (!document.fullscreenElement) {
+        editorArea.requestFullscreen();
+        notesArea.style.display = 'none'; // Hide the notes area
+    } else {
+        document.exitFullscreen();
+        notesArea.style.display = 'block'; // Show the notes area
+    }
+    
+}
+
 
 // Function to display notes
+
 function displayNotes() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';
@@ -64,7 +109,28 @@ function displayNotes() {
     });
 }
 
-// Function to add a note
+// Function to edit notes
+document.getElementById('addNoteButton').onclick = function() {
+    if (!quill) return;
+
+    const noteContent = quill.root.innerHTML;
+
+    if (noteContent) {
+        if (editingIndex !== -1) {
+            // Update existing note
+            notes[editingIndex] = noteContent;
+            editingIndex = -1; // Reset editing index
+        } else {
+            // Add new note
+            notes.push(noteContent);
+        }
+        quill.root.innerHTML = '';
+        displayNotes();
+    } else {
+        alert('Please enter a note.');
+    }
+};
+
 document.getElementById('addNoteButton').onclick = function() {
     if (!quill) return;
 
