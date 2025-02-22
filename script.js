@@ -50,11 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Number of lines in scroll", currentLineNumber);
 
             if (currentLineNumber > previousLineNumber) {
-                                    // Log current font style
-                                    const currentFormat = quill.getFormat();
-                                    console.log("Current font style:", currentFormat.font);
-                                    console.log("Current font size:", currentFormat.size);
+                // Log current font style
+                const currentFormat = quill.getFormat();
+                console.log("Current font style:", currentFormat.font);
+                console.log("Current font size:", currentFormat.size);
 
+            //if current font or size is undefined, set default font and size
+            if (!currentFormat.font && !currentFormat.size) {
+                setTimeout(() => {
+                    quill.format('font', 'arial');
+                    quill.format('size', '16px');
+                    document.getElementById('fontFamily').value = 'arial';
+                    document.getElementById('fontSize').value = '16';
+                }, 10);
+            }
+            else {
                 //Add wait time to allow the font style to be applied
                 setTimeout(() => {
                     quill.format('font', currentFormat.font);
@@ -65,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             previousLineNumber = currentLineNumber;
-        });
+        }
+    });
 
 
         });
