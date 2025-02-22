@@ -70,19 +70,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         });
 
-function toggleFullScreen() {
-    const editorArea = document.querySelector('.editor-area');
-    const notesArea = document.querySelector('.notes-area');
+            // Add fullscreen change event listener
+    document.addEventListener('fullscreenchange', () => {
+        const notesArea = document.querySelector('.notes-area');
+        if (!document.fullscreenElement) {
+            notesArea.style.display = 'block'; // Show the notes area when exiting full-screen mode
+        }
+    });
 
-    if (!document.fullscreenElement) {
-        editorArea.requestFullscreen();
-        notesArea.style.display = 'none'; // Hide the notes area
-    } else {
+        function toggleFullScreen() {
+            const editorArea = document.querySelector('.editor-area');
+            const notesArea = document.querySelector('.notes-area');
+        
+            if (!document.fullscreenElement) {
+                editorArea.requestFullscreen();
+                notesArea.style.display = 'none'; // Hide the notes area
+            } else {
         document.exitFullscreen();
-        notesArea.style.display = 'block'; // Show the notes area
-    }
+                    notesArea.style.display = 'block'; // Show the notes area
+            }
     
-}
+        }
 
 
 // Function to display notes
