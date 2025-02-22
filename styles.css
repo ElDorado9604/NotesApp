@@ -50,8 +50,9 @@ h1 {
     border-left: 1px solid #ccc;    
     /* Added styles for scrolling */
     max-height: 400px; /* Adjust the max-height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */ 
+    overflow: auto; /* Enable both vertical and horizontal scrolling */ 
 }
+
 
 textarea {
     width: 100%;
@@ -226,6 +227,11 @@ li {
 /* Style for the Quill editor */
 #noteContent {
     width: 100%;
+    max-width: 860px;
+    /* Set a maximum width:
+    With this, if user goes to 2nd line without presssing enter key ,
+    it considers 2nd line as part of same paragraph. Because of this current font style & size continues to next line.*/
+    max-height: 400px; /* Set a maximum height */
     min-height: 300px; /* Adjust as needed */
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -233,6 +239,7 @@ li {
     transition: background-color 0.3s ease, color 0.3s ease;
     font-size: 16px;
     padding: 10px;
+    overflow: auto; /* Enable both vertical and horizontal scrolling */
 }
 
 /* Full-Screen Styles */
