@@ -136,7 +136,77 @@ li {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    width: auto; /* Adjust width as per contents */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
+
+/* Start: Toggle Switch Styles Added for Preserve Formatting*/
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0; /* Add padding for more space */
+}
+
+.toggle {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.toggle-switch {
+    display: inline-block;
+    background: #ccc;
+    border-radius: 16px;
+    width: 58px;
+    height: 32px;
+    position: relative;
+    vertical-align: middle;
+    transition: background 0.25s;
+    margin-right: 10px; /* Add right margin */
+}
+.toggle-switch:before, .toggle-switch:after {
+    content: "";
+}
+.toggle-switch:before {
+    display: block;
+    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transition: left 0.25s;
+}
+.toggle:hover .toggle-switch:before {
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.toggle-checkbox:checked + .toggle-switch {
+    background: #56c080;
+}
+.toggle-checkbox:checked + .toggle-switch:before {
+    left: 30px;
+}
+
+.toggle-checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+.toggle-label {
+    margin-right: 10px; /* Add margin to the right of the label */
+    margin-left: 10px; /* Add margin to the left of the label */
+    /*font-weight: bold;*/
+    color: black;
+}
+
+.dark-mode .toggle-label {
+    margin-right: 10px;
+    color: #fff;
+}
+/* End: Toggle Switch Styles Added for Preserve Formatting*/
 
 .dropdown-content a {
     color: black;
