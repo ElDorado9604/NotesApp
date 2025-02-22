@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     quill.format('size', currentFormat.size);
                     document.getElementById('fontFamily').value = currentFormat.font;
                     document.getElementById('fontSize').value = currentFormat.size.replace('px', '');
-                }, 1000);
+                }, 10);
             }
             
             previousLineNumber = currentLineNumber;
