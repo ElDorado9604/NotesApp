@@ -246,6 +246,8 @@ li {
 :fullscreen #noteContent {
     width: 100%;
     height: 100vh; /* Full height of the viewport */
+    max-width: none; /* Override max-width */
+    max-height: none; /* Override max-height */
     margin: 0; /* Remove margin */
     padding: 10px; /* Maintain padding */
     border: 1px solid #ccc; /* Add border */
@@ -254,7 +256,6 @@ li {
 :fullscreen .notes-area {
     display: none; /* Hide the notes area in full-screen mode */
 }
-
 
 /* Target Quill editor directly */
 .ql-editor {
