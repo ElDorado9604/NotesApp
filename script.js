@@ -70,7 +70,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         });
 
+function toggleFullScreen() {
+    const editorArea = document.querySelector('.editor-area');
+    const notesArea = document.querySelector('.notes-area');
+
+    if (!document.fullscreenElement) {
+        editorArea.requestFullscreen();
+        notesArea.style.display = 'none'; // Hide the notes area
+    } else {
+        document.exitFullscreen();
+        notesArea.style.display = 'block'; // Show the notes area
+    }
+    
+}
+
+
 // Function to display notes
+
 function displayNotes() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';
@@ -93,7 +109,28 @@ function displayNotes() {
     });
 }
 
-// Function to add a note
+// Function to edit notes
+document.getElementById('addNoteButton').onclick = function() {
+    if (!quill) return;
+
+    const noteContent = quill.root.innerHTML;
+
+    if (noteContent) {
+        if (editingIndex !== -1) {
+            // Update existing note
+            notes[editingIndex] = noteContent;
+            editingIndex = -1; // Reset editing index
+        } else {
+            // Add new note
+            notes.push(noteContent);
+        }
+        quill.root.innerHTML = '';
+        displayNotes();
+    } else {
+        alert('Please enter a note.');
+    }
+};
+
 document.getElementById('addNoteButton').onclick = function() {
     if (!quill) return;
 

@@ -235,7 +235,19 @@ li {
     padding: 10px;
 }
 
-/* Existing styles */
+/* Full-Screen Styles */
+:fullscreen #noteContent {
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    margin: 0; /* Remove margin */
+    padding: 10px; /* Maintain padding */
+    border: 1px solid #ccc; /* Add border */
+    background-color: white; /* Set background color to avoid black screen */
+}
+:fullscreen .notes-area {
+    display: none; /* Hide the notes area in full-screen mode */
+}
+
 
 /* Target Quill editor directly */
 .ql-editor {
