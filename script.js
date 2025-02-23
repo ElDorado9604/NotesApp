@@ -78,12 +78,20 @@ function toggleFullScreen() {
         editorArea.requestFullscreen();
         notesArea.style.display = 'none'; // Hide the notes area
     } else {
-        document.exitFullscreen();
-        notesArea.style.display = 'block'; // Show the notes area
+        document.exitFullscreen().then(() => {
+            notesArea.style.display = 'block'; // Show the notes area
+        }).catch((err) => {
+            console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
+        });
     }
-    
-}
 
+}
+document.addEventListener('fullscreenchange', () => {
+    const notesArea = document.querySelector('.notes-area');
+    if (!document.fullscreenElement) {
+        notesArea.style.display = 'block'; // Show the notes area when exiting full-screen mode
+    }
+});
 
 // Function to display notes
 
@@ -131,27 +139,6 @@ document.getElementById('addNoteButton').onclick = function() {
     }
 };
 
-document.getElementById('addNoteButton').onclick = function() {
-    if (!quill) return;
-
-    const noteContent = quill.root.innerHTML;
-
-    if (noteContent) {
-        if (editingIndex !== -1) {
-            // Update existing note
-            notes[editingIndex] = noteContent;
-            editingIndex = -1; // Reset editing index
-        } else {
-            // Add new note
-            notes.push(noteContent);
-        }
-        quill.root.innerHTML = '';
-        displayNotes();
-    } else {
-        alert('Please enter a note.');
-    }
-};
-
 // Function to edit a note
 function editNote(index) {
     if (!quill) return;
@@ -159,6 +146,9 @@ function editNote(index) {
     const noteContent = notes[index];
     quill.root.innerHTML = noteContent;
     editingIndex = index;
+        // Extract and apply formatting
+        const delta = quill.clipboard.convert(noteContent);
+        quill.setContents(delta, 'silent');
 }
 
 // Function to delete a note
