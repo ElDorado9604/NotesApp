@@ -1,0 +1,55 @@
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.container.dark-mode {
+    background-color: #444;
+    color: #fff;
+}
+
+.dark-mode button {
+    background-color: #666;
+    color: #fff;
+    border: none;
+}
+
+.dark-mode li {
+    background-color: #555;
+    color: #fff;
+}
+
+.dark-mode .dropbtn {
+    background-color: #555;
+    color: #fff;
+}
+
+.dark-mode .dropdown-content {
+    background-color: #444;
+}
+
+.dark-mode .dropdown-content a {
+    color: #fff;
+    background-color: #444;
+}
+
+.dark-mode .toolbar {
+    background-color: #555;
+}
+
+.dark-mode .toolbar button {
+    background-color: #555;
+    color: #fff;
+}
+
+.dark-mode .toolbar select {
+    background-color: #555;
+    color: #fff;
+    border-color: #666;
+}
+
+.dark-mode #noteContent {
+    background-color: #555;
+    color: #fff;
+    border-color: #666;
+}
