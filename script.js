@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-<<<<<<< HEAD
         // Update font size and font family dropdown when text changes
         let previousLineNumber = 1;
         quill.on('text-change', (delta, oldDelta, source) => {
@@ -66,61 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             previousLineNumber = currentLineNumber;
-=======
-        document.getElementById('preserveFormatting').addEventListener('change', function() {
-            if (this.checked) {
-                console.log('Preserve Formatting is ON');
-                // Add functionality for when the toggle is ON
-                let previousLineNumber = 1;
-                quill.on('text-change', (delta, oldDelta, source) => {
-                    const scroll = quill.scroll;
-                    const currentLineNumber = scroll.children.length;
-                    console.log("Number of lines in scroll", currentLineNumber);
-
-                    if (currentLineNumber > previousLineNumber) {
-                        // Log current font style
-                        const currentFormat = quill.getFormat();
-                        console.log("Current font style:", currentFormat.font);
-                        console.log("Current font size:", currentFormat.size);
-
-                        // if current font or size is undefined, set default font and size
-                        if (!currentFormat.font && !currentFormat.size) {
-                            setTimeout(() => {
-                                quill.format('font', 'arial');
-                                quill.format('size', '16px');
-                                document.getElementById('fontFamily').value = 'arial';
-                                document.getElementById('fontSize').value = '16';
-                            }, 10);
-                        } else {
-                            // Add wait time to allow the font style to be applied
-                            setTimeout(() => {
-                                quill.format('font', currentFormat.font);
-                                quill.format('size', currentFormat.size);
-                                document.getElementById('fontFamily').value = currentFormat.font;
-                                document.getElementById('fontSize').value = currentFormat.size.replace('px', '');
-                            }, 10);
-                        }
-
-                        previousLineNumber = currentLineNumber;
-                    }
-                });
-            } else {
-                console.log('Preserve Formatting is OFF');
-                //set default font and size
-                setTimeout(() => {
-                    quill.format('font', 'arial');
-                    quill.format('size', '16px');
-                    document.getElementById('fontFamily').value = 'arial';
-                    document.getElementById('fontSize').value = '16';
-                }, 10); 
-            }
->>>>>>> origin/main
         });
 
 
         });
 
-<<<<<<< HEAD
 function toggleFullScreen() {
     const editorArea = document.querySelector('.editor-area');
     const notesArea = document.querySelector('.notes-area');
@@ -143,30 +92,6 @@ document.addEventListener('fullscreenchange', () => {
         notesArea.style.display = 'block'; // Show the notes area when exiting full-screen mode
     }
 });
-=======
-            // Add fullscreen change event listener
-    document.addEventListener('fullscreenchange', () => {
-        const notesArea = document.querySelector('.notes-area');
-        if (!document.fullscreenElement) {
-            notesArea.style.display = 'block'; // Show the notes area when exiting full-screen mode
-        }
-    });
-
-        function toggleFullScreen() {
-            const editorArea = document.querySelector('.editor-area');
-            const notesArea = document.querySelector('.notes-area');
-        
-            if (!document.fullscreenElement) {
-                editorArea.requestFullscreen();
-                notesArea.style.display = 'none'; // Hide the notes area
-            } else {
-        document.exitFullscreen();
-                    notesArea.style.display = 'block'; // Show the notes area
-            }
-    
-        }
-
->>>>>>> origin/main
 
 // Function to display notes
 
@@ -193,30 +118,6 @@ function displayNotes() {
 }
 
 // Function to edit notes
-<<<<<<< HEAD
-=======
-document.getElementById('addNoteButton').onclick = function() {
-    if (!quill) return;
-
-    const noteContent = quill.root.innerHTML;
-
-    if (noteContent) {
-        if (editingIndex !== -1) {
-            // Update existing note
-            notes[editingIndex] = noteContent;
-            editingIndex = -1; // Reset editing index
-        } else {
-            // Add new note
-            notes.push(noteContent);
-        }
-        quill.root.innerHTML = '';
-        displayNotes();
-    } else {
-        alert('Please enter a note.');
-    }
-};
-
->>>>>>> origin/main
 document.getElementById('addNoteButton').onclick = function() {
     if (!quill) return;
 
