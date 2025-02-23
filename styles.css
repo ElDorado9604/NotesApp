@@ -31,9 +31,30 @@ body {
     border-left: 1px solid #ccc;    
     /* Added styles for scrolling */
     max-height: 400px; /* Adjust the max-height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */ 
+    overflow: auto; /* Enable both vertical and horizontal scrolling */ 
 }
 
+<<<<<<< HEAD
+=======
+
+textarea {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+}
+
+.dark-mode textarea {
+    background-color: #555;
+    color: #fff;
+    border-color: #666;
+}
+
+>>>>>>> origin/main
 button {
     padding: 10px 15px;
     margin-top: 10px;
@@ -84,7 +105,77 @@ li {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    width: auto; /* Adjust width as per contents */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
+
+/* Start: Toggle Switch Styles Added for Preserve Formatting*/
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0; /* Add padding for more space */
+}
+
+.toggle {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.toggle-switch {
+    display: inline-block;
+    background: #ccc;
+    border-radius: 16px;
+    width: 58px;
+    height: 32px;
+    position: relative;
+    vertical-align: middle;
+    transition: background 0.25s;
+    margin-right: 10px; /* Add right margin */
+}
+.toggle-switch:before, .toggle-switch:after {
+    content: "";
+}
+.toggle-switch:before {
+    display: block;
+    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transition: left 0.25s;
+}
+.toggle:hover .toggle-switch:before {
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.toggle-checkbox:checked + .toggle-switch {
+    background: #56c080;
+}
+.toggle-checkbox:checked + .toggle-switch:before {
+    left: 30px;
+}
+
+.toggle-checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+.toggle-label {
+    margin-right: 10px; /* Add margin to the right of the label */
+    margin-left: 10px; /* Add margin to the left of the label */
+    /*font-weight: bold;*/
+    color: black;
+}
+
+.dark-mode .toggle-label {
+    margin-right: 10px;
+    color: #fff;
+}
+/* End: Toggle Switch Styles Added for Preserve Formatting*/
 
 .dropdown-content a {
     color: black;
@@ -146,6 +237,11 @@ li {
 /* Style for the Quill editor */
 #noteContent {
     width: 100%;
+    max-width: 860px;
+    /* Set a maximum width:
+    With this, if user goes to 2nd line without presssing enter key ,
+    it considers 2nd line as part of same paragraph. Because of this current font style & size continues to next line.*/
+    max-height: 400px; /* Set a maximum height */
     min-height: 300px; /* Adjust as needed */
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -153,12 +249,18 @@ li {
     transition: background-color 0.3s ease, color 0.3s ease;
     font-size: 16px;
     padding: 10px;
+    overflow: auto; /* Enable both vertical and horizontal scrolling */
 }
 
 /* Full-Screen Styles */
 :fullscreen #noteContent {
     width: 100%;
     height: 100vh; /* Full height of the viewport */
+<<<<<<< HEAD
+=======
+    max-width: none; /* Override max-width */
+    max-height: none; /* Override max-height */
+>>>>>>> origin/main
     margin: 0; /* Remove margin */
     padding: 10px; /* Maintain padding */
     border: 1px solid #ccc; /* Add border */
@@ -167,7 +269,10 @@ li {
 :fullscreen .notes-area {
     display: none; /* Hide the notes area in full-screen mode */
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 
 /* Target Quill editor directly */
 .ql-editor {
