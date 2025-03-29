@@ -138,14 +138,20 @@ document.getElementById('addNoteButton').onclick = function() {
 // Function to edit a note
 function editNote(index) {
     if (!quill) return;
-
-    const noteContent = notes[index];
-    quill.root.innerHTML = noteContent;
+    
+    const noteContent = notes[index]; // Get the note content
+    console.log("Loaded Note Content:", noteContent); // Log to verify content
+    
+    // Clear the editor before inserting new content
+    quill.setContents([]); 
+    
+    // Insert the content correctly
+    quill.root.innerHTML = noteContent; //switch to below if this is not working
+    // quill.clipboard.dangerouslyPasteHTML(0, noteContent); // Uncomment if needed
     editingIndex = index;
-        // Extract and apply formatting
-        const delta = quill.clipboard.convert(noteContent);
-        quill.setContents(delta, 'silent');
 }
+
+
 
 // Function to delete a note
 function deleteNote(index) {
@@ -285,7 +291,7 @@ function changeFontFamily() {
 
     // Check if the selected font is 'code' and apply code block formatting
     if (fontFamily === 'code') {
-        quill.format('code', true);
+        quill.format('code-block', true);
     }
 }
 
