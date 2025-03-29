@@ -78,6 +78,28 @@
             </select>
         </div>
 
+        <div id="floatingToolbar" class="toolbar">
+            <button onclick="boldText()"><i class="fa fa-bold"></i></button>
+            <button onclick="italicText()"><i class="fa fa-italic"></i></button>
+            <button onclick="underlineText()"><i class="fa fa-underline"></i></button>
+            <select id="floatingFontFamily" onchange="changeFontFamilyFloating()" class="ql-font">
+                <option value="times-new-roman">Times New Roman</option>
+                <option value="arial">Arial</option>
+                <option value="courier-new">Courier New</option>
+                <option value="georgia">Georgia</option>
+                <option value="verdana">Verdana</option>
+                <option value="code">Code</option>
+            </select>           
+            <select id="floatingFontSize" onchange="changeFontSizeFloating()">
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        
+
         <div class="main-content">
             <div class="editor-area">
                 <!-- Element to hold the Quill editor -->

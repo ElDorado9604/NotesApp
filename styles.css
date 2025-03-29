@@ -211,3 +211,14 @@ li {
 .ql-size-20 .ql-editor {
     font-size: 20px;
 }
+
+#floatingToolbar {
+    position: absolute;
+    display: none;
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+}
