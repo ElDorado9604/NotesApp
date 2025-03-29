@@ -29,18 +29,74 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fontFamily').value = 'arial';
     document.getElementById('fontSize').value = '16';
     // Update font size dropdown when selection changes
-    quill.on('selection-change', function(range) {
-        if (range) {
-            const format = quill.getFormat(range);
-            if (format.size) {
-                const sizeValue = format.size.replace('px', '');
-                document.getElementById('fontSize').value = sizeValue;
+    quill.on('selection-change', function (range) {
+        const floatingToolbar = document.getElementById('floatingToolbar');
+        const mainFont = document.getElementById('fontFamily');
+        const floatingFont = document.getElementById('floatingFontFamily');
+        const mainSize = document.getElementById('fontSize');
+        const floatingSize = document.getElementById('floatingFontSize');
+        const editorContainer = document.querySelector('.ql-container'); // Editor container
+        const editorRect = editorContainer.getBoundingClientRect(); // Get editor position
+    
+        //Get formatting when there is no selection
+            if (range) {
+                const format = quill.getFormat(range);
+                console.log("Selected text format:", format);
+                if (format.size) {
+                    const sizeValue = format.size.replace('px', '');
+                    document.getElementById('fontSize').value = sizeValue;
+                }
+                if (format.font) {
+                    document.getElementById('fontFamily').value = format.font;
+                }
             }
-            if (format.font) {
-                document.getElementById('fontFamily').value = format.font;
+
+        // Check if there is a selection
+        if (range && range.length > 0) {
+            try {
+                // Get formatting of selected text
+                const format = quill.getFormat(range);
+                console.log("Selected text format:", format);
+    
+                // Update font dropdowns in both toolbars
+                if (format.font) {
+                    if (mainFont && mainFont.value !== format.font) mainFont.value = format.font;
+                    if (floatingFont && floatingFont.value !== format.font) floatingFont.value = format.font;
+                }
+    
+                // Update font size dropdowns in both toolbars
+                if (format.size) {
+                    const sizeValue = format.size.replace('px', '');
+                    if (mainSize && mainSize.value !== sizeValue) mainSize.value = sizeValue;
+                    if (floatingSize && floatingSize.value !== sizeValue) floatingSize.value = sizeValue;
+                }
+    
+                // Position Floating Toolbar
+                const bounds = quill.getBounds(range.index);
+                const left = editorRect.left + bounds.left + window.scrollX;
+                const top = editorRect.top + bounds.top + window.scrollY - 50; // 50px above selection
+    
+                floatingToolbar.style.left = `${left}px`;
+                floatingToolbar.style.top = `${top}px`;
+                floatingToolbar.style.display = 'block';
+    
+            } catch (error) {
+                console.error("Error updating selection:", error);
             }
+        } else {
+            floatingToolbar.style.display = 'none'; // Hide when no selection
         }
     });
+    
+    
+    
+    // Hide toolbar when clicking outside
+    document.addEventListener('click', function(event) {
+        const toolbar = document.getElementById('floatingToolbar');
+        if (!toolbar.contains(event.target) && !document.querySelector('.ql-container').contains(event.target)) {
+            toolbar.style.display = 'none';
+        }
+    });    
 
     // Update font size and font family dropdown when text changes
     let previousLineNumber = 1;
@@ -275,24 +331,55 @@ function alignRight() {
     quill.format('align', 'right');
 }
 
+// Change Font Size from Main Toolbar
 function changeFontSize() {
     if (!quill) return;
 
-    const fontSize = document.getElementById('fontSize').value;
+    const size = document.getElementById('fontSize').value + 'px';
+    quill.format('size', size);
 
-    quill.format('size', fontSize + 'px');
+    // Sync floating toolbar
+    document.getElementById('floatingFontSize').value = size.replace('px', '');
+}
+
+// Change Font Size from Floating Toolbar
+function changeFontSizeFloating() {
+    if (!quill) return;
+
+    const size = document.getElementById('floatingFontSize').value + 'px';
+    quill.format('size', size);
+
+    // Sync main toolbar
+    document.getElementById('fontSize').value = size.replace('px', '');
 }
 
 function changeFontFamily() {
     if (!quill) return;
 
     const fontFamily = document.getElementById('fontFamily').value;
-    quill.format('font', fontFamily);
-
-    // Check if the selected font is 'code' and apply code block formatting
+    
     if (fontFamily === 'code') {
-        quill.format('code-block', true);
+        quill.format('code-block', true); // Apply code block formatting
+    } else {
+        quill.format('code-block', false); // Remove code block if another font is selected
+        quill.format('font', fontFamily); // Apply selected font
     }
+    // Sync floating toolbar
+    document.getElementById('floatingFontFamily').value = fontFamily;
+}
+function changeFontFamilyFloating() {
+    if (!quill) return;
+
+    const fontFamily = document.getElementById('floatingFontFamily').value;
+    
+    if (fontFamily === 'code') {
+        quill.format('code-block', true); // Apply code block formatting
+    } else {
+        quill.format('code-block', false); // Remove code block if another font is selected
+        quill.format('font', fontFamily); // Apply selected font
+    }
+    // Sync main toolbar
+    document.getElementById('fontFamily').value = fontFamily;
 }
 
 // Additional functions for the menu options
