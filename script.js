@@ -296,6 +296,10 @@ function boldText() {
     const format = quill.getFormat();
     quill.format('bold', !format.bold);
 }
+function addBulletPoints() {
+    const format = quill.getFormat();
+    quill.format('list', format.list === 'bullet' ? false : 'bullet');
+}
 
 function italicText() {
     if (!quill) return;
