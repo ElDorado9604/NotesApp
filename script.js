@@ -6,7 +6,7 @@ let quill; // Define quill outside the DOMContentLoaded event
 var Size = Quill.import('attributors/style/size');
 var Font = Quill.import('attributors/class/font');
 Size.whitelist = ['12px', '14px', '16px', '18px', '20px'];
-Font.whitelist = ['times-new-roman', 'arial', 'courier-new', 'georgia', 'verdana'];
+Font.whitelist = ['times-new-roman', 'arial', 'courier-new', 'georgia', 'verdana','code'];
 Quill.register(Font, true);
 Quill.register(Size, true);
 
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
     quill.format('size', '16px');
     document.getElementById('fontFamily').value = 'arial';
     document.getElementById('fontSize').value = '16';
-        // Update font size dropdown when selection changes
-        quill.on('selection-change', function(range) {
+    // Update font size dropdown when selection changes
+    quill.on('selection-change', function(range) {
         if (range) {
             const format = quill.getFormat(range);
             if (format.size) {
@@ -42,33 +42,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-        // Update font size and font family dropdown when text changes
-        let previousLineNumber = 1;
-        quill.on('text-change', (delta, oldDelta, source) => {
-            const scroll = quill.scroll;
-            const currentLineNumber = scroll.children.length;
-            console.log("Number of lines in scroll", currentLineNumber);
+    // Update font size and font family dropdown when text changes
+    let previousLineNumber = 1;
+    quill.on('text-change', (delta, oldDelta, source) => {
+        const scroll = quill.scroll;
+        const currentLineNumber = scroll.children.length;
+        console.log("Number of lines in scroll", currentLineNumber);
 
-            if (currentLineNumber > previousLineNumber) {
-                                    // Log current font style
-                                    const currentFormat = quill.getFormat();
-                                    console.log("Current font style:", currentFormat.font);
-                                    console.log("Current font size:", currentFormat.size);
+        if (currentLineNumber > previousLineNumber) {
+            // Log current font style
+            const currentFormat = quill.getFormat();
+            console.log("Current font style:", currentFormat.font);
+            console.log("Current font size:", currentFormat.size);
 
                 //Add wait time to allow the font style to be applied
-                setTimeout(() => {
-                    quill.format('font', currentFormat.font);
-                    quill.format('size', currentFormat.size);
-                    document.getElementById('fontFamily').value = currentFormat.font;
-                    document.getElementById('fontSize').value = currentFormat.size.replace('px', '');
-                }, 10);
-            }
-            
-            previousLineNumber = currentLineNumber;
-        });
+            setTimeout(() => {
+                quill.format('font', currentFormat.font);
+                quill.format('size', currentFormat.size);
+                document.getElementById('fontFamily').value = currentFormat.font;
+                document.getElementById('fontSize').value = currentFormat.size.replace('px', '');
+            }, 10);
+        }
 
-
-        });
+        previousLineNumber = currentLineNumber;
+    });
+});
 
 function toggleFullScreen() {
     const editorArea = document.querySelector('.editor-area');
@@ -84,7 +82,6 @@ function toggleFullScreen() {
             console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
         });
     }
-
 }
 document.addEventListener('fullscreenchange', () => {
     const notesArea = document.querySelector('.notes-area');
@@ -94,7 +91,6 @@ document.addEventListener('fullscreenchange', () => {
 });
 
 // Function to display notes
-
 function displayNotes() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';
@@ -273,7 +269,6 @@ function alignRight() {
     quill.format('align', 'right');
 }
 
-
 function changeFontSize() {
     if (!quill) return;
 
@@ -287,6 +282,11 @@ function changeFontFamily() {
 
     const fontFamily = document.getElementById('fontFamily').value;
     quill.format('font', fontFamily);
+
+    // Check if the selected font is 'code' and apply code block formatting
+    if (fontFamily === 'code') {
+        quill.format('code', true);
+    }
 }
 
 // Additional functions for the menu options
